@@ -6,6 +6,14 @@
 <title>Liliana Masłowska - Osteopatia | Linki</title>
 <meta name="description" content="Osteopatia w Olsztynie. Umów wizytę, przeczytaj blog i poznaj praktykę Liliany Masłowskiej." />
 <meta name="theme-color" content="#003566" />
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KDXTSKN7SK"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-KDXTSKN7SK');
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://use.typekit.net/qvy5egw.css">
@@ -154,5 +162,22 @@ body{
     © Liliana Masłowska Osteopatia
   </p>
 </main>
+<script>
+// Tagowanie klikow w linki -> GA4 (statyczna strona, eventy dochodza)
+document.addEventListener('click', function(e){
+  var a = e.target.closest && e.target.closest('a');
+  if (!a || !window.gtag) return;
+  var href = a.getAttribute('href') || '';
+  var ev = null;
+  if (href.indexOf('tel:') === 0) ev = 'klik_telefon';
+  else if (href.indexOf('rsqhealth.com') > -1) ev = 'klik_rezerwacja';
+  else if (href.indexOf('znanylekarz') > -1) ev = 'klik_znanylekarz';
+  else if (href.indexOf('google.com/search') > -1) ev = 'klik_opinie';
+  else if (href.indexOf('instagram.com') > -1) ev = 'klik_instagram';
+  else if (href.indexOf('facebook.com') > -1) ev = 'klik_facebook';
+  else if (href.indexOf('lmaslowska.pl') > -1) ev = 'klik_strona';
+  if (ev) gtag('event', ev, { link_url: href });
+});
+</script>
 </body>
 </html>
